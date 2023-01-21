@@ -1,3 +1,8 @@
+import { useMediaQuery, useTheme } from "@mui/material";
+import { Formik } from "formik";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 
 
@@ -31,3 +36,29 @@ const initialValuesLogin = {
     email: "",
     password: ""
 }
+
+const Form = () => {
+    const [pageType, setPageType] = useState("login");
+    const theme = useTheme();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isNonMobile = useMediaQuery("(min-width:600px)");
+    const isLogin = pageType === "login";
+    const isRegister = pageType === "register";
+
+    const handleFormSubmit = async (values, onSubmitProps) => {
+    };
+
+    return (
+        <Formik
+            onSubmit={handleFormSubmit}
+            initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
+            validationSchema = {isLogin ? loginSchema : registerSchema}
+        >
+
+        </Formik>
+    )
+   
+};
+
+export default Form;
