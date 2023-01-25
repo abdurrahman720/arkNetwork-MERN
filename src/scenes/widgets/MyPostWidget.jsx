@@ -10,14 +10,15 @@ import setPosts from "../../state";
 
 const MyPostWidget = ({ picturePath }) => {
   const dispatch = useDispatch();
-  const [isImage, setIsImage] = useState(true);
+  const [isImage, setIsImage] = useState(false);
   const [image, setImage] = useState(null);
   const [post, setPost] = useState("");
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
   const isNonMobileScreen = useMediaQuery("(min-width: 1000px)");
-  const mediumMain = palette.neutral.medium;
+  const medium = palette.neutral.medium;
+  const mediumMain = palette.neutral.mediumMain
 
   const handlePost = async () => {
     const formData = new FormData();
@@ -55,7 +56,7 @@ const MyPostWidget = ({ picturePath }) => {
       </FlexBetween>
       {isImage && (
         <Box
-          border={`1px solid ${mediumMain}`}
+          border={`1px solid ${medium}`}
           borderRadius="5px"
           mt="1rem"
           p="1rem"
@@ -88,7 +89,8 @@ const MyPostWidget = ({ picturePath }) => {
                               </Box>
                               {image && (
                                   <IconButton
-                                  onClick={()=>setImage(null)}
+                    onClick={() => setImage(null)}
+                    sx={{width: "100%"}}
                                   >
                                       <DeleteOutlined/>
                                   </IconButton>
