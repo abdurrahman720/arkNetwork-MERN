@@ -4,7 +4,8 @@ const initialState = {
     mode: "light",
     user: {
         firstName: "John",
-        lastName: "Abram"
+        lastName: "Abram",
+        friends: []
     },
     token: null,
     posts: [],
