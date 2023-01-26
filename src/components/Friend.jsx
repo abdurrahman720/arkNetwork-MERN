@@ -14,7 +14,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
     const navigate = useNavigate();
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
-    const friends = useSelector((state) => state.friends);
+    const friends = useSelector((state) => state.user.friends);
 
     const primaryLight = palette.primary.light;
     const primaryDark = palette.primary.dark;
@@ -23,9 +23,10 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
 
     const isFriend = friends?.find((f) => f._id === friendId);
 
+
     const patchFriend = async () => {
         const res = await fetch(`http://localhost:5003/users/${_id}/${friendId}`, {
-            method: 'POST',
+            method: 'PATCH',
             headers: {
                 Authorization: `Bearer ${token}`,
                 "content-type": "application/json"
