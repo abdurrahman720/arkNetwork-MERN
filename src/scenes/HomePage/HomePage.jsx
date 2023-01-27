@@ -11,9 +11,8 @@ import UserWidgets from '../widgets/UserWidgets';
 const HomePage = () => {
     const isNonMobileScreen = useMediaQuery("(min-width:1000px)");
     const { _id, picturePath } = useSelector((state) => state.user);
-
-  
-
+    const user = useSelector((state) => state.user);
+    console.log(user)
     
     return (
         <Box>

@@ -5,7 +5,7 @@ const initialState = {
     user: {
         firstName: "John",
         lastName: "Abram",
-        friends: []
+     
     },
     token: null,
     posts: [],

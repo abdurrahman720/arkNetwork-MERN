@@ -11,10 +11,10 @@ import UserImage from './UserImage';
 const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    console.log(userId)
+ 
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
-    const friends = useSelector((state) => state.user.friends);
+    const friends = useSelector((state) => state.user?.friends);
     console.log(friends)
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
@@ -24,18 +24,18 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
 
     // const [fetchFriends, setFetchFriends] = useState([]);
 
-    const { data: fetchFriends = [] ,refetch} = useQuery({
-        queryKey: ["fetchFriends"],
-        queryFn:async () => {
-            const res = await fetch(`http://localhost:5003/users/${userId}/friends`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const data = await res.json();
-            return data
-        }
-    })
+    // const { data: fetchFriends = [] ,refetch} = useQuery({
+    //     queryKey: ["fetchFriends"],
+    //     queryFn:async () => {
+    //         const res = await fetch(`http://localhost:5003/users/${userId}/friends`, {
+    //             headers: { Authorization: `Bearer ${token}` }
+    //         });
+    //         const data = await res.json();
+    //         return data
+    //     }
+    // })
 
-    console.log(fetchFriends);
+    // console.log(fetchFriends);
 
 
     // const getFriends = async () => {
@@ -51,7 +51,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
     // },[]) //eslint-disable-line
 
   
-    const isFriend = fetchFriends.find((friend) => friend._id === friendId);
+    const isFriend = friends?.find((friend) => friend._id === friendId);
   
     const patchFriend = async () => {
       const response = await fetch(
@@ -65,8 +65,8 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
         }
       );
         const data = await response.json();
-        refetch()
-        // dispatch(setFriends({ friends: data }));
+        // refetch()
+        dispatch(setFriends({ friends: data }));
         return data;
     };
   
