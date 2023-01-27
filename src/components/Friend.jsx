@@ -20,24 +20,11 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
     const main = palette.neutral.main;
     const medium = palette.neutral.medium;
 
-    // const [fetchFriends, setFetchFriends] = useState([]);
 
-    // const { data: fetchFriends = [] ,refetch} = useQuery({
-    //     queryKey: ["fetchFriends"],
-    //     queryFn:async () => {
-    //         const res = await fetch(`http://localhost:5003/users/${userId}/friends`, {
-    //             headers: { Authorization: `Bearer ${token}` }
-    //         });
-    //         const data = await res.json();
-    //         return data
-    //     }
-    // })
-
-    // console.log(fetchFriends);
 
 
     const getFriends = async () => {
-        const res = await fetch(`http://localhost:5003/users/${_id}/friends`, {
+        const res = await fetch(`http://localhost:5003/users/${userId}/friends`, {
             headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
