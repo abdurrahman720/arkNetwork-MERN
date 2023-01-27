@@ -14,8 +14,6 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
  
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
-    const friends = useSelector((state) => state.user?.friends);
-    console.log(friends)
     const { palette } = useTheme();
     const primaryLight = palette.primary.light;
     const primaryDark = palette.primary.dark;
@@ -38,18 +36,20 @@ const Friend = ({ friendId, name, subtitle, userPicturePath,userId }) => {
     // console.log(fetchFriends);
 
 
-    // const getFriends = async () => {
-    //     const res = await fetch(`http://localhost:5003/users/${_id}/friends`, {
-    //         headers: { Authorization: `Bearer ${token}` }
-    //     });
-    //     const data = await res.json();
-    //     dispatch(setFriends({friends:data}))
-    //     setFetchFriends(data)
-    // }
-    // useEffect(() => {
-    //     getFriends()
-    // },[]) //eslint-disable-line
+    const getFriends = async () => {
+        const res = await fetch(`http://localhost:5003/users/${_id}/friends`, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
+        const data = await res.json();
+        dispatch(setFriends({friends:data}))
+     
+    }
+    useEffect(() => {
+        getFriends()
+    },[]) //eslint-disable-line
 
+    const friends = useSelector((state) => state.user?.friends);
+    console.log(friends)
   
     const isFriend = friends?.find((friend) => friend._id === friendId);
   
